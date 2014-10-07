@@ -1,0 +1,35 @@
+{
+  "name": "jangkrik",
+  "version": "0.0.1",
+  "homepage": "https://github.com/waskito/jangkrik",
+  "authors": [
+    "waskito <yg.waskito@gmail.com>"
+  ],
+  "description": "another music player built use node-webkit",
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "node-webkit",
+    "jangkrik",
+    "music",
+    "player"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-media-player": "~0.5.8",
+    "bootstrap": "~3.2.0",
+    "fontawesome": "~4.2.0",
+    "angular": "~1.2.26"
+  }
+}

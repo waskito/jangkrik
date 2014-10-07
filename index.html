@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+  <html ng-app="docs">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>mediaPlayer: Using ng-repeat</title>
+
+    <link rel="stylesheet"  href="components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet"  href="components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    
+    <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-media-player/dist/angular-media-player.js"></script>
+    <script type="text/javascript">
+    angular.module('docs', ['mediaPlayer'])
+.config(function ($interpolateProvider) {
+  $interpolateProvider.startSymbol('[[');
+  $interpolateProvider.endSymbol(']]');
+})
+.run(function ($rootScope) {
+  // helper function to seek to a percentage
+  $rootScope.seekPercentage = function ($event) {
+    var percentage = ($event.offsetX / $event.target.offsetWidth);
+    if (percentage <= 1) {
+      return percentage;
+    } else {
+      return 0;
+    }
+  };
+});
+
+    </script>
+    
+  <script type="text/javascript">angular.module('docs')
+// Taken from http://en.wikipedia.org/wiki/List_of_songs_considered_the_best
+// Thanks again, wikipedia.
+.constant('top100SongsEver', [
+  { url: 'http://upload.wikimedia.org/wikipedia/en/5/5e/U2_One.ogg', displayName: 'U2 - One' },
+  { url: 'http://upload.wikimedia.org/wikipedia/en/6/6c/NirvanaSmellsLikeTeenSpirit.ogg', displayName: 'Nirvana - Smells Like Teen Spirit' },
+  { url: 'http://upload.wikimedia.org/wikipedia/en/b/be/My_Name_Is.ogg', displayName: 'Eminem - My Name is' },
+  { url: 'http://upload.wikimedia.org/wikipedia/en/c/c4/Radiohead_-_Creep_%28sample%29.ogg', displayName: 'Radiohead - Creep' },
+  { url: 'http://upload.wikimedia.org/wikipedia/en/6/64/OasisLiveForever.ogg', displayName: 'Oasis - Live Forever' },
+  { url: 'http://upload.wikimedia.org/wikipedia/en/6/65/Eagles_-_Hotel_California.ogg', displayName: 'Eagles - Hotel California' }
+])
+.controller('RepeatController', function ($scope, top100SongsEver) {
+  $scope.audioPlaylist = top100SongsEver.map(function (song, index, array) {
+    var parseTitle = song.displayName.match(/(.*?)\s?-\s?(.*)?$/);
+    return { src: song.url, type: 'audio/ogg', artist: parseTitle[1], title: parseTitle[2] };
+  });
+});
+</script>
+
+  </head>
+  <body>
+<div class="col-xs-12 col-sm-9" ng-controller="RepeatController">
+
+<audio media-player="mediaPlayer" playlist="audioPlaylist"></audio>
+
+<div class="player-control">
+  <div class="btn" ng-click="mediaPlayer.play()">
+    <span>Play</span>
+    <i class="fa fa-play"></i>
+  </div>
+  <div class="btn" ng-click="mediaPlayer.playPause()">
+    <i class="fa" ng-class="{ 'fa-pause': mediaPlayer.playing, 'fa-play': !mediaPlayer.playing }"></i>
+  </div>
+  <div class="btn" ng-click="mediaPlayer.next()">
+    <span>Next</span>
+    <i class="fa fa-step-forward"></i>
+  </div>
+  <div class="btn" ng-click="mediaPlayer.prev()">
+    <i class="fa fa-step-backward"></i>
+    <span>Prev</span>
+  </div>
+  <div class="btn btn-noclick">
+    <span>currentTrack: <span class="badge">[[ mediaPlayer.currentTrack ]]</span></span>
+  </div>
+  <div class="btn btn-noclick">
+    <span><i class="fa fa-clock-o"></i>: <span class="badge">[[ mediaPlayer.formatTime ]]</span></span>
+  </div>
+  <div class="btn btn-noclick">
+    <span>volume: <span class="badge">[[ mediaPlayer.volume * 100 | number:0 ]]%</span></span>
+  </div>
+  <div class="btn" ng-click="mediaPlayer.setVolume(mediaPlayer.volume - 0.1)">
+    <span><i class="fa fa-volume-down"></i></span>
+  </div>
+  <div class="btn" ng-click="mediaPlayer.setVolume(mediaPlayer.volume + 0.1)">
+    <span><i class="fa fa-volume-up"></i></span>
+  </div>
+  <div class="progress" ng-click="mediaPlayer.seek(mediaPlayer.duration * seekPercentage($event))">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" ng-style="{ width: mediaPlayer.currentTime*100/mediaPlayer.duration + '%' }"></div>
+    <div class="time" ng-show="mediaPlayer.formatTime">
+      <span>[[ mediaPlayer.formatTime ]]</span><b>/</b><span>[[ mediaPlayer.formatDuration ]]</span>
+    </div>
+  </div>
+</div>
+
+
+<table class="table table-hover table-rounded table-cursor">
+  <thead>
+    <th>#</th>
+    <th>Artist</th>
+    <th>Title</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="song in audioPlaylist" ng-click="mediaPlayer.playPause($index)" ng-class="{ active: mediaPlayer.playing && mediaPlayer.currentTrack-1 === $index }">
+      <td>[[ $index+1 ]]</td>
+      <td>[[ song.artist ]]</td>
+      <td>[[ song.title ]]</td>
+    </tr>
+  </tbody>
+</table>
+	<hr>
+    <div class="footer">
+      <div class="container">
+        angular-media-player is copyright ©2014 <a href="http://col3.me">Valerio Coltre</a>, licensed for use under the permissive <a href="http://choosealicense.com/">MIT Open Source License</a>.
+      </div>
+    </div>
+  </body>
+</html>

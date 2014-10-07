@@ -1,0 +1,30 @@
+{
+  "name": "jangkrik",
+  "version": "0.0.1",
+  "description": "another music player built use node-webkit",
+  "main": "index.html",
+  "window":{
+    "toolbar":false,
+    "width":660,
+    "height":500
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/waskito/jangkrik.git"
+  },
+  "keywords": [
+    "node-webkit",
+    "jangkrik",
+    "music",
+    "player"
+  ],
+  "author": "waskito",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/waskito/jangkrik/issues"
+  },
+  "homepage": "https://github.com/waskito/jangkrik"
+}

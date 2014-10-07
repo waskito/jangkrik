@@ -1,0 +1,234 @@
+/* Left will inherit from right (so we don't need to duplicate code) */
+.github-fork-ribbon {
+  /* The right and left classes determine the side we attach our banner to */
+  position: absolute;
+
+  /* Add a bit of padding to give some substance outside the "stitching" */
+  padding: 2px 0;
+
+  /* Set the base colour */
+  background-color: #a00;
+
+  /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+
+  /* Add a drop shadow */
+  -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.github-fork-ribbon a,
+.github-fork-ribbon a:hover {
+  /* Set the font */
+  font: 700 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+
+  /* Set the text properties */
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+
+  /* Set the geometry. If you fiddle with these you'll also need
+     to tweak the top and right values in .github-fork-ribbon. */
+  width: 200px;
+  line-height: 20px;
+
+  /* Set the layout properties */
+  display: inline-block;
+  padding: 2px 0;
+
+  /* Add "stitching" effect */
+  border-width: 1px 0;
+  border-style: dotted;
+  border-color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.github-fork-ribbon-wrapper {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.github-fork-ribbon-wrapper.fixed {
+  position: fixed;
+}
+
+.github-fork-ribbon-wrapper.left {
+  left: 0;
+}
+
+.github-fork-ribbon-wrapper.right {
+  right: 0;
+}
+
+.github-fork-ribbon-wrapper.left-bottom {
+  position: fixed;
+  top: inherit;
+  bottom: 0;
+  left: 0;
+}
+
+.github-fork-ribbon-wrapper.right-bottom {
+  position: fixed;
+  top: inherit;
+  bottom: 0;
+  right: 0;
+}
+
+.github-fork-ribbon-wrapper.right .github-fork-ribbon {
+  top: 42px;
+  right: -43px;
+
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.github-fork-ribbon-wrapper.left .github-fork-ribbon {
+  top: 42px;
+  left: -43px;
+
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+
+.github-fork-ribbon-wrapper.left-bottom .github-fork-ribbon {
+  top: 80px;
+  left: -43px;
+
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.github-fork-ribbon-wrapper.right-bottom .github-fork-ribbon {
+  top: 80px;
+  right: -43px;
+
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+
+/**
+ * Custom CSS
+ */
+
+.player-control {
+  margin-bottom: 10px;
+}
+
+body {
+  padding-top: 20px;
+}
+
+body > .container {
+  padding-top: 10px;
+}
+
+.navbar-text.navbar-arrow {
+  display: inline-block;
+  padding: 0 5px;
+}
+.navbar-text.navbar-arrow:before {
+  font-family: FontAwesome;
+  content: "\f054";
+}
+
+.navbar-text.navbar-active {
+  display: inline-block;
+  color: #fff;
+  background-color: #00bc8c;
+  padding: 15px;
+  margin: 4px 0 0 0;
+  cursor: pointer;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.table-rounded {
+  border: 2px solid white;
+  border-radius: 5px;
+  border-collapse: separate;
+  box-shadow: 2px 2px 4px rgb(80, 80, 80);
+}
+
+.table-cursor tr {
+  cursor: pointer;
+}
+
+.btn-noclick {
+  cursor: default;
+}
+
+.progress {
+  margin: 6px 0 12px 0;
+  height: 20px;
+}
+
+.progress .time {
+  position: absolute;
+  left: 50%;
+  color: #0ce3ac;
+  font-weight: 800;
+}
+
+table .on-drag-hover {
+  outline: white 5px solid;
+}
+table .on-drag-hover > td {
+  padding-top: 40px !important;
+}
+
+/* fix to .hljs */
+.hljs {
+  white-space: pre;
+  overflow: auto;
+}
+
+/**
+ * Sticky Footer by Ryan Fait
+ * http://ryanfait.com/
+ */
+html, body {
+  height: 100%;
+}
+.footerwrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -31px; /* the bottom margin is the negative value of the footer's height */
+}
+.push {
+  height: 40px; /* '.push' must be the same height as 'footer' */
+}
+.footer {
+  background-color: dimgrey;
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
